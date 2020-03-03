@@ -27,8 +27,9 @@ class PageController extends Controller
      */
     public function index()
     {
+        
         $query = Register::orderBy('id','DESC')->paginate(12);
-        return view('front-end.index',compact('query'));
+        return view('front-end.index',compact('users','query'));
     }
 
     /**

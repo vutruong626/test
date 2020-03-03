@@ -23,7 +23,7 @@ class PageController extends Controller
     public function listBrief()
     {
         $query = Register::orderBy('id','DESC')->paginate(12);
-        return view('back-end.file.list-user',compact('query'));
+        return view('back-end.file.list-validation',compact('query'));
     }
     /**
      * Show the form for creating a new resource.

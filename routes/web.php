@@ -22,14 +22,20 @@
 Route::namespace('Frontend')->group(function () {
     Route::get('/','PageController@index');
 
-    Route::get('/create','PageController@create')->name('register');
-    Route::post('/create','PageController@register')->name('create_register');
+    Route::get('/create','PageController@create')->name('get_register');
+    Route::post('/create/register','PageController@register')->name('create_register');
     Route::get('/success','PageController@success')->name('success');
 });
 
 Route::namespace('Backend')->group(function () {
     Route::get('/admin','LoginController@index')->name('login');
     Route::post('/admin','LoginController@getAdmin')->name('get_admin');
+
+    Route::get('/list/user','LoginController@listUser')->name('list_user');
+    Route::get('/edit-user/{id?}','LoginController@editUser')->name('edit_user');
+    Route::put('/edit-user','LoginController@updateUser')->name('update_user');
+
+
 
     Route::get('/register','LoginController@register')->name('register');
     Route::post('/create','LoginController@createUser')->name('create_user');

@@ -48,7 +48,7 @@
             <div class="link">{{ $query->links() }}</div>
         </table>
 
-        <a href="{{route('register')}}"><button class="btn" style="width: 200px;">Đăng ký hồ sơ</button></a>
+        <a href="{{route('get_register')}}"><button class="btn" style="width: 200px;">Đăng ký hồ sơ</button></a>
         <br>
     </div>
 </div>

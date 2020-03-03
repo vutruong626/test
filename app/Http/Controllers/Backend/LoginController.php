@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Gate;
 use Validator;
 use DB;
 use Hash;
@@ -31,8 +32,9 @@ class LoginController extends Controller
             'password' => $request->password,
             
         ];
+        dd(Auth::user());
         if (Auth::attempt($login)) {
-            return redirect()->route('get_user');
+            return redirect()->route('list_user');
         } else {
             return redirect()->back()->with('status', 'Email hoặc Password không chính xác');
         }
@@ -115,9 +117,11 @@ class LoginController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function listUser()
     {
-        //
+
+        $users = User::all();
+        return view('back-end.login.list-user',compact('users'));
     }
 
     /**
@@ -127,9 +131,15 @@ class LoginController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function editUser($id)
     {
-        //
+        $user = User::where('id',$id)->first();
+        if(Gate::denies('edit-user')){
+            return redirect()->route('list_user');
+        }
+        
+        $role = Role::all();
+        return view('back-end.login.edit-user',compact('role','user'));
     }
 
     /**
@@ -138,8 +148,13 @@ class LoginController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function updateUser(Request $request)
     {
-        //
+
+        $user = User::first();
+        // $user->roles->sync($request->roles);
+        $user->roles()->sync($request->roles);
+
+        return redirect()->route('list_user');
     }
 }

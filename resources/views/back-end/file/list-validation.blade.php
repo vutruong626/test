@@ -20,30 +20,30 @@
                 </tr>
             </thead>
             <tbody id="myTable">
-                @foreach($query as $item)
-                <tr>
-                    <td>{{$item->code}}</td>
-                    <td>{{$item->fullname}}</td>
-                    <td>{{$item->number_t}}</td>
-                    <td>{{$item->number_th}}</td>
-                    <td>{{$item->ward}}</td>
-                    <td>{{$item->district}}</td>
-                    @if($item->status == 1)
-                    <td style="color: red;">Hồ sơ bị lỗi</td>
-                    @endif
-                    @if($item->status == 2)
-                    <td style="color: #ff9800;">đang chờ xử lý</td>
-                    @endif
-                    @if($item->status == 3)
-                    <td style="color: #0b7dda;">đang duyệt</td>
-                    @endif
-                    @if($item->status == 4)
-                    <td style="color: #46a049;">Đã duyệt</td>
-                    @endif
-                    <td> <a href="{{route('validattion_brief',$item->id)}}"><i class="fa fa-edit"
-                                style="text-align: center;display: block;"></i></a></td>
-                </tr>
-                @endforeach
+            @foreach($query as $item)
+            <tr>
+                <td>{{$item->code}}</td>
+                <td>{{$item->fullname}}</td>
+                <td>{{$item->number_t}}</td>
+                <td>{{$item->number_th}}</td>
+                <td>{{$item->ward}}</td>
+                <td>{{$item->district}}</td>
+                @if($item->status == 1)
+                <td style="color: red;">Hồ sơ bị lỗi</td>
+                @endif
+                @if($item->status == 2)
+                <td style="color: #ff9800;">đang chờ xử lý</td>
+                @endif
+                @if($item->status == 3)
+                <td style="color: #0b7dda;">đang duyệt</td>
+                @endif
+                @if($item->status == 4)
+                <td style="color: #46a049;">Đã duyệt</td>
+                @endif
+                <td> <a href="{{route('validattion_brief',$item->id)}}"><i class="fa fa-edit"
+                            style="text-align: center;display: block;"></i></a></td>
+            </tr>
+            @endforeach
 
             </tbody>
             <div class="link">{{ $query->links() }}</div>
